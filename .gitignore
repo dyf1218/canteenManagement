@@ -19,7 +19,7 @@ target/
 *.iml
 *.ipr
 /out/
-/src/test
+/src/test/
 
 ### NetBeans ###
 /nbproject/private/

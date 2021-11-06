@@ -3,6 +3,7 @@ package com.dyf.controller;
 import com.dyf.dto.ChosenFoodDTO;
 import com.dyf.dto.OrderDTO;
 import com.dyf.dto.StudentDTO;
+import com.dyf.entity.CategoryInfo;
 import com.dyf.entity.FoodInfo;
 import com.dyf.entity.OrderDetail;
 import com.dyf.entity.StudentInfo;
@@ -119,6 +120,16 @@ public class SellController {
     @PostMapping(value = "/editFood", produces = "application/json")
     public ResultVO editFood(FoodInfo foodInfo) {
         return ResultVOUtil.success(EDIT_SUCCESS.getMessage(), iFoodInfoService.edit(foodInfo));
+    }
+
+    @PostMapping(value = "getCategory", produces = "application/json")
+    public ResultVO getCategory(CategoryInfo categoryInfo)
+    {
+        if (categoryInfo.getCategoryId().isEmpty()){
+            return ResultVOUtil.fail(CATEGORY_NOT_EXIST.getCode(), CATEGORY_NOT_EXIST.getMessage());
+        }
+        //
+        // TODO: 2021/11/6  
     }
 
 

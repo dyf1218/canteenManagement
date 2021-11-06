@@ -11,7 +11,16 @@ public class KeyUtil
         return System.currentTimeMillis() + String.valueOf(number);
     }
 
+    //生成食物id
     public static synchronized String genUniqueFoodKey()
+    {
+        Random random = new Random();
+        Integer number = random.nextInt(9000) + 1000; // 生成4位的随机数
+        return System.currentTimeMillis() + String.valueOf(number);
+    }
+
+    //生成类别id
+    public static synchronized String genUniqueCategoryKey()
     {
         Random random = new Random();
         Integer number = random.nextInt(9000) + 1000; // 生成4位的随机数

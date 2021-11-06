@@ -21,4 +21,13 @@ public class FoodForm implements Serializable
 
         private Integer foodStatus = FoodStatusEnum.UP.getCode();
 
+        //食物类别
+        private String foodCategory;
+
+        //食物配料
+        private String foodIngredient;
+
+        //食物简介
+        private String foodProfile;
+
 }

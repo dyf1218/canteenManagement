@@ -45,7 +45,9 @@ public enum ResultEnum {
 
     STUDENT_NOT_EXIST(103, "学生不存在"),
 
-    ADMIN_NOT_EXIST(104,"管理员不存在");
+    ADMIN_NOT_EXIST(104,"管理员不存在"),
+
+    CATEGORY_NOT_EXIST(105,"类别不存在");
 
     private final Integer code;
 

@@ -44,4 +44,10 @@ public class FoodInfo implements Serializable
     {
         return EnumUtil.getByCode(foodStatus,FoodStatusEnum.class);
     }
+
+    private String foodCategory;
+
+    private String foodIngredient;
+
+    private String foodProfile;
 }
