@@ -26,4 +26,12 @@ public class KeyUtil
         Integer number = random.nextInt(9000) + 1000; // 生成4位的随机数
         return System.currentTimeMillis() + String.valueOf(number);
     }
+
+    //生成banner id
+    public static synchronized String genUniqueBannerKey()
+    {
+        Random random = new Random();
+        Integer number = random.nextInt(90000) + 10000; // 生成5位的随机数
+        return System.currentTimeMillis() + String.valueOf(number);
+    }
 }

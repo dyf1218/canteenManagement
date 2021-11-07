@@ -8,17 +8,19 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class CategoryInfo {
+public class BannerInfo
+{
     private static final long serialVersionUID = 1L;
 
     @Id
-    private String categoryId;
+    private String bannerId;
 
     @Generated
-    private Integer categoryNum;
+    private Integer bannerNum;
 
-    private String categoryName;
+    private String bannerName;
 
-    private Integer categoryStatus;
+    private String bannerIcon;
 
+    private Integer bannerStatus;
 }

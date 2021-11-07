@@ -25,4 +25,10 @@ public class FoodInfoVO implements Serializable
 
     @JsonProperty("icon")
     private String foodIcon;
+
+    private String foodCategory;
+
+    private String foodIngredient;
+
+    private String foodProfile;
 }

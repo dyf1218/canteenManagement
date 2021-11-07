@@ -47,7 +47,11 @@ public enum ResultEnum {
 
     ADMIN_NOT_EXIST(104,"管理员不存在"),
 
-    CATEGORY_NOT_EXIST(105,"类别不存在");
+    CATEGORY_NOT_EXIST(105,"类别不存在"),
+
+    DELETE_FAIL(106, "该类别不为空，删除失败"),
+
+    BANNER_NOT_EXIST(107,"banner不存在");
 
     private final Integer code;
 

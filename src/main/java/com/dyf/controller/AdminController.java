@@ -1,21 +1,21 @@
 package com.dyf.controller;
 
 import com.dyf.dto.AdminDTO;
+import com.dyf.entity.BannerInfo;
+import com.dyf.entity.CategoryInfo;
 import com.dyf.entity.FoodInfo;
 import com.dyf.entity.StudentInfo;
 import com.dyf.enums.ResultEnum;
 import com.dyf.exception.SellException;
+import com.dyf.form.BannerForm;
+import com.dyf.form.CategoryForm;
 import com.dyf.form.FoodForm;
 import com.dyf.form.StudentForm;
-import com.dyf.service.IAdministratorInfoService;
-import com.dyf.service.IFoodInfoService;
-import com.dyf.service.IStudentService;
+import com.dyf.service.*;
 import com.dyf.utils.KeyUtil;
 import com.dyf.utils.ResultVOUtil;
 import com.dyf.utils.TokenProcessor;
-import com.dyf.vo.FoodInfoVO;
-import com.dyf.vo.ResultVO;
-import com.dyf.vo.StudentInfoVO;
+import com.dyf.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +47,12 @@ public class AdminController {
 
     @Autowired
     private IAdministratorInfoService iAdministratorInfoService;
+
+    @Autowired
+    private ICategoryService iCategoryService;
+
+    @Autowired
+    private IBannerService iBannerService;
 
     // http://127.0.0.1:8080/canteen/admin/getFoodList
     @GetMapping("/getFoodList")
@@ -277,4 +283,122 @@ public class AdminController {
 
         return ResultVOUtil.fail(ADMIN_NOT_EXIST.getCode(), info, token);
     }
+
+
+    @PostMapping(value = "/category/add", produces = "application/json")
+    public ResultVO addCategory(@RequestBody CategoryForm categoryForm)
+    {
+        CategoryInfo categoryInfo = new CategoryInfo();
+
+        categoryInfo.setCategoryId(KeyUtil.genUniqueCategoryKey());
+
+        BeanUtils.copyProperties(categoryForm,categoryInfo);
+
+        iCategoryService.save(categoryInfo);
+
+        return ResultVOUtil.success(ADD_SUCCESS.getCode(),ADD_SUCCESS.getMessage());
+
+    }
+
+    @PostMapping(value = "/category/edit", produces = "application/json")
+    public ResultVO editCategory(@RequestBody CategoryForm categoryForm)
+    {
+        CategoryInfo categoryInfo = iCategoryService.findByCategoryId(categoryForm.getCategoryId());
+
+        if(categoryInfo == null){
+            return ResultVOUtil.fail(CATEGORY_NOT_EXIST.getCode(), CATEGORY_NOT_EXIST.getMessage());
+        }
+
+        BeanUtils.copyProperties(categoryForm, categoryInfo);
+
+        iCategoryService.save(categoryInfo);
+
+        return ResultVOUtil.success(EDIT_SUCCESS);
+    }
+
+    @PostMapping(value = "/category/get", produces = "application/json")
+    public ResultVO getCategory()
+    {
+        /*将类别列表封装入category再传给前端*/
+        CategoryInfoVO categoryInfoVO = new CategoryInfoVO();
+        categoryInfoVO.setCategoryInfoList(iCategoryService.findAllCategory());
+
+        return ResultVOUtil.success(categoryInfoVO);
+    }
+
+    @PostMapping(value = "/category/delete", produces = "application/json")
+    public ResultVO deleteCategory(String categoryId)
+    {
+        CategoryInfo categoryInfo = iCategoryService.findByCategoryId(categoryId);
+
+        if(categoryInfo == null){
+            return ResultVOUtil.fail(CATEGORY_NOT_EXIST.getCode(),CATEGORY_NOT_EXIST.getMessage());
+        }
+
+        FoodInfo foodInfo = iFoodInfoService.findByFoodCategory(categoryId);
+
+        if (foodInfo == null){
+            iCategoryService.delete(categoryInfo);
+        }else {
+            return ResultVOUtil.fail(DELETE_FAIL.getCode(), DELETE_FAIL.getMessage());
+        }
+        return ResultVOUtil.success(DELETE_SUCCESS);
+    }
+
+    @PostMapping(value = "/banner/add", produces = "application/json")
+    public ResultVO addBanner(@RequestBody BannerForm bannerForm)
+    {
+        BannerInfo bannerInfo = new BannerInfo();
+
+        bannerInfo.setBannerId(KeyUtil.genUniqueBannerKey());
+
+        BeanUtils.copyProperties(bannerForm,bannerInfo);
+
+        iBannerService.save(bannerInfo);
+
+        return ResultVOUtil.success(ADD_SUCCESS.getCode(),ADD_SUCCESS.getMessage());
+
+    }
+
+    @PostMapping(value = "/banner/delete", produces = "application/json")
+    public ResultVO deleteBanner(String bannerId)
+    {
+        BannerInfo bannerInfo = iBannerService.findById(bannerId);
+
+        if(bannerInfo == null){
+            return ResultVOUtil.fail(BANNER_NOT_EXIST.getCode(),BANNER_NOT_EXIST.getMessage());
+        }
+
+        iBannerService.delete(bannerInfo);
+        return ResultVOUtil.success(DELETE_SUCCESS);
+
+    }
+
+    @PostMapping(value = "/banner/edit", produces = "application/json")
+    public ResultVO editBanner(@RequestBody BannerForm bannerForm)
+    {
+        BannerInfo bannerInfo = iBannerService.findById(bannerForm.getBannerId());
+
+        if(bannerInfo == null){
+            return ResultVOUtil.fail(BANNER_NOT_EXIST.getCode(), BANNER_NOT_EXIST.getMessage());
+        }
+
+        BeanUtils.copyProperties(bannerForm,bannerInfo);
+
+        iBannerService.save(bannerInfo);
+
+        return ResultVOUtil.success(EDIT_SUCCESS);
+
+    }
+
+    @PostMapping(value = "/banner/get", produces = "application/json")
+    public ResultVO getBanner()
+    {
+        /*将类别列表封装后再传给前端*/
+        BannerInfoVO bannerInfoVO = new BannerInfoVO();
+        bannerInfoVO.setBannerInfoList(iBannerService.findAllBanner());
+
+        return ResultVOUtil.success(bannerInfoVO);
+    }
+
 }

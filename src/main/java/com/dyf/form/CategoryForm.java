@@ -1,24 +1,20 @@
-package com.dyf.entity;
+package com.dyf.form;
 
+import com.dyf.entity.CategoryInfo;
 import lombok.Data;
-import lombok.Generated;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.util.List;
 
-@Entity
 @Data
-public class CategoryInfo {
+public class CategoryForm {
+
     private static final long serialVersionUID = 1L;
 
-    @Id
     private String categoryId;
 
-    @Generated
     private Integer categoryNum;
 
     private String categoryName;
 
     private Integer categoryStatus;
-
 }

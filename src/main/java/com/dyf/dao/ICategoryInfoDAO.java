@@ -9,4 +9,6 @@ public interface ICategoryInfoDAO extends JpaRepository<CategoryInfo,String>
 {
     CategoryInfo findByCategoryId(String categoryId);
 
+    List<CategoryInfo> findAll();
+
 }

@@ -9,4 +9,8 @@ public interface ICategoryService
     CategoryInfo findByCategoryId(String categoryId);
 
     List<CategoryInfo> findAllCategory();
+
+    CategoryInfo save(CategoryInfo categoryInfo);
+
+    CategoryInfo delete(CategoryInfo categoryInfo);
 }

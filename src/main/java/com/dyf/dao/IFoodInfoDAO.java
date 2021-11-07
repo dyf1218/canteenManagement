@@ -15,4 +15,6 @@ public interface IFoodInfoDAO extends JpaRepository<FoodInfo, String>
 
     Page<FoodInfo> findByFoodNameLike(String foodName, Pageable pageable);
     List<FoodInfo> findByFoodNameLike(String foodName);
+
+    FoodInfo findByFoodCategory(String foodCategory);
 }

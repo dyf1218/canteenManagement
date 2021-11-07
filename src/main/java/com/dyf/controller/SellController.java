@@ -9,11 +9,14 @@ import com.dyf.entity.OrderDetail;
 import com.dyf.entity.StudentInfo;
 import com.dyf.enums.ResultEnum;
 import com.dyf.exception.SellException;
+import com.dyf.form.CategoryForm;
 import com.dyf.form.OrderForm;
+import com.dyf.service.ICategoryService;
 import com.dyf.service.IFoodInfoService;
 import com.dyf.service.IOrderService;
 import com.dyf.service.IStudentService;
 import com.dyf.utils.ResultVOUtil;
+import com.dyf.vo.CategoryInfoVO;
 import com.dyf.vo.FoodInfoVO;
 import com.dyf.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +43,9 @@ public class SellController {
 
     @Autowired
     private IStudentService iStudentService;
+
+    @Autowired
+    private ICategoryService iCategoryService;
 
     // http://127.0.0.1:8080/canteen/sell/foodList
     @CrossOrigin
@@ -122,16 +128,13 @@ public class SellController {
         return ResultVOUtil.success(EDIT_SUCCESS.getMessage(), iFoodInfoService.edit(foodInfo));
     }
 
-    @PostMapping(value = "getCategory", produces = "application/json")
-    public ResultVO getCategory(CategoryInfo categoryInfo)
-    {
-        if (categoryInfo.getCategoryId().isEmpty()){
-            return ResultVOUtil.fail(CATEGORY_NOT_EXIST.getCode(), CATEGORY_NOT_EXIST.getMessage());
-        }
+    @PostMapping(value = "/category/get", produces = "application/json")
+    public ResultVO getCategory() {
+        /*将类别列表封装入category再传给前端*/
+        CategoryInfoVO categoryInfoVO = new CategoryInfoVO();
+        categoryInfoVO.setCategoryInfoList(iCategoryService.findAllCategory());
 
-
-
+        return ResultVOUtil.success(categoryInfoVO);
     }
-
 
 }

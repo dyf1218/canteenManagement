@@ -13,5 +13,5 @@ public class CategoryDTO
 
     private String categoryName;
 
-    private Integer ifShow;
+    private Integer categoryStatus;
 }

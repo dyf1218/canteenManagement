@@ -117,4 +117,9 @@ public class FoodInfoServiceImpl implements IFoodInfoService {
         foodInfo.setFoodStatus(FoodStatusEnum.DOWN.getCode());
         return iFoodInfoDAO.save(foodInfo);
     }
+
+    @Override
+    public FoodInfo findByFoodCategory(String foodCategory) {
+        return iFoodInfoDAO.findByFoodCategory(foodCategory);
+    }
 }

@@ -34,4 +34,6 @@ public interface IFoodInfoService
 
     /** 食物下架 */
     FoodInfo offSale(String foodId);
+
+    FoodInfo findByFoodCategory(String foodCategory);
 }
