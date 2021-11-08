@@ -263,14 +263,19 @@ public class AdminController {
                 ", password = " +
                 password);
 
-        AdminDTO admin = iAdministratorInfoService.findByAdminId(adminId);
+        AdminDTO admin = new AdminDTO();
+        try{
+            admin = iAdministratorInfoService.findByAdminId(adminId);
+        }catch (Exception e){
+            return ResultVOUtil.fail(ADMIN_NOT_EXIST.getCode(), ADMIN_NOT_EXIST.getMessage());
+        }
 
         if (admin != null) {
             log.info(admin.toString());
             if (Objects.equals(password, admin.getAdminPassword())) {
                 info = LOGIN_SUCCESS.getMessage();
                 log.info(info);
-                return ResultVOUtil.success(info, admin);
+                return ResultVOUtil.success(info, admin, token);
             } else {
                 info = PASSWORD_MISMATCH.getMessage();
                 log.info(info);
@@ -281,7 +286,7 @@ public class AdminController {
             log.info(info);
         }
 
-        return ResultVOUtil.fail(ADMIN_NOT_EXIST.getCode(), info, token);
+        return ResultVOUtil.fail(ADMIN_NOT_EXIST.getCode(), info);
     }
 
 

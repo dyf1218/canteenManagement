@@ -12,4 +12,5 @@ public class AdminDTO implements Serializable
     private String adminId;
 
     private String adminPassword;
+
 }

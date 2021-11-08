@@ -22,7 +22,7 @@ public class AdministratorInfoImpl implements IAdministratorInfoService
 
         /** 查询结果为空的处理 */
         if (administratorInfo == null) {
-            throw new SellException(ResultEnum.STUDENT_NOT_EXIST);
+            throw new SellException(ResultEnum.ADMIN_NOT_EXIST);
         }
 
         AdminDTO adminDTO = new AdminDTO();
