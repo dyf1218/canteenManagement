@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 123456
-    url: jdbc:mysql://localhost:3306/canteenmanagement?characterEncoding=utf-8&useSSL=false
+    username: canteen_db
+    password: canteen_database123456
+    url: jdbc:mysql://rm-bp1c16v5yyj31hvqabo.mysql.rds.aliyuncs.com/canteen?characterEncoding=utf-8&useSSL=false
   jpa:
     show-sql: true
     hibernate:
