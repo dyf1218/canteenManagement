@@ -295,9 +295,9 @@ public class AdminController {
     {
         CategoryInfo categoryInfo = new CategoryInfo();
 
-        categoryInfo.setCategoryId(KeyUtil.genUniqueCategoryKey());
-
         BeanUtils.copyProperties(categoryForm,categoryInfo);
+
+        categoryInfo.setCategoryId(KeyUtil.genUniqueCategoryKey());
 
         iCategoryService.save(categoryInfo);
 
@@ -355,9 +355,9 @@ public class AdminController {
     {
         BannerInfo bannerInfo = new BannerInfo();
 
-        bannerInfo.setBannerId(KeyUtil.genUniqueBannerKey());
-
         BeanUtils.copyProperties(bannerForm,bannerInfo);
+
+        bannerInfo.setBannerId(KeyUtil.genUniqueBannerKey());
 
         iBannerService.save(bannerInfo);
 
@@ -366,7 +366,7 @@ public class AdminController {
     }
 
     @PostMapping(value = "/banner/delete", produces = "application/json")
-    public ResultVO deleteBanner(String bannerId)
+    public ResultVO deleteBanner(@RequestParam(value = "bannerId") String bannerId)
     {
         BannerInfo bannerInfo = iBannerService.findById(bannerId);
 
@@ -396,7 +396,7 @@ public class AdminController {
 
     }
 
-    @PostMapping(value = "/banner/get", produces = "application/json")
+    @GetMapping(value = "/banner/get", produces = "application/json")
     public ResultVO getBanner()
     {
         /*将类别列表封装后再传给前端*/

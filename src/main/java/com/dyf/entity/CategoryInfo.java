@@ -14,7 +14,6 @@ public class CategoryInfo {
     @Id
     private String categoryId;
 
-    @Generated
     private Integer categoryNum;
 
     private String categoryName;

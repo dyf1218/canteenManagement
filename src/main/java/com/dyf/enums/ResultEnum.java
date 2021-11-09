@@ -13,13 +13,13 @@ public enum ResultEnum {
 
     QUERY_SUCCESS(null, "查询成功"),
 
-    ADD_SUCCESS(null, "添加成功"),
+    ADD_SUCCESS(0, "添加成功"),
 
     DEPOSIT_SUCCESS(null, "充值成功"),
 
     PAY_SUCCESS(null, "支付成功"),
 
-    EDIT_SUCCESS(null, "编辑成功"),
+    EDIT_SUCCESS(0, "编辑成功"),
 
     DELETE_SUCCESS(null, "删除成功"),
 
